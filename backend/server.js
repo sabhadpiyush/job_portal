@@ -44,7 +44,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/notifications', notificationRoutes);
 
 // In production, serve the built React app from the same server
-const dist = path.join(__dirname, '..', 'client', 'dist');
+const dist = path.join(__dirname, "..", "frontend", "dist");
 if (process.env.NODE_ENV === 'production' && fs.existsSync(dist)) {
   app.use(express.static(dist));
   app.get(/^(?!\/api|\/uploads).*/, (_req, res) => res.sendFile(path.join(dist, 'index.html')));

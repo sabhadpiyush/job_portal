@@ -2,6 +2,6 @@ node_modules
 dist
 .env
 .DS_Store
-server/uploads/*/*
-!server/uploads/*/.gitkeep
-!server/uploads/resumes/sample.pdf
+backend/uploads/*/*
+!backend/uploads/*/.gitkeep
+!backend/uploads/resumes/sample.pdf
