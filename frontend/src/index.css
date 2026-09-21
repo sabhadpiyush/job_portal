@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 247 246;
+  --surface: 255 255 255;
+  --sunken: 234 240 238;
+  --ink: 16 35 31;
+  --muted: 91 107 102;
+  --line: 218 227 224;
+  --brand: 14 124 102;
+  --brand-strong: 10 96 79;
+  --brand-soft: 224 243 238;
+  --accent: 242 169 59;
+  --danger: 200 55 55;
+}
+
+.dark {
+  --bg: 11 21 19;
+  --surface: 19 32 29;
+  --sunken: 26 42 38;
+  --ink: 232 240 236;
+  --muted: 148 166 159;
+  --line: 36 54 49;
+  --brand: 52 190 156;
+  --brand-strong: 90 214 182;
+  --brand-soft: 18 51 43;
+  --accent: 245 184 76;
+  --danger: 240 100 100;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; line-height: 1.15; }
+  :focus-visible { @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-bg; }
+  ::selection { background: rgb(var(--accent) / 0.35); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply bg-brand text-white hover:bg-brand-strong dark:text-bg; }
+  .btn-outline { @apply border border-line bg-surface text-ink hover:border-brand hover:text-brand; }
+  .btn-ghost { @apply text-muted hover:bg-sunken hover:text-ink; }
+  .btn-danger { @apply border border-danger/40 text-danger hover:bg-danger/10; }
+  .btn-sm { @apply px-3 py-1.5 text-[13px]; }
+
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70
+      transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25;
+  }
+  .label { @apply mb-1.5 block text-sm font-medium text-ink; }
+  .hint { @apply mt-1 text-xs text-muted; }
+
+  .card { @apply rounded-xl border border-line bg-surface; }
+  .chip { @apply inline-flex items-center gap-1 rounded-md bg-sunken px-2 py-1 text-xs font-medium text-muted; }
+  .page { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+}
+
+/* One deliberate moment of motion: the pipeline card on the home page */
+@keyframes stage-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.stage-in { animation: stage-in 0.5s ease both; }
+@keyframes pop { 0% { transform: scale(0.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.star-pop { animation: pop 0.6s ease 1.6s both; }
